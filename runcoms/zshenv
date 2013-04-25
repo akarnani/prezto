@@ -10,3 +10,10 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
+export WORKON_HOME=$HOME/.envs
+export PROJECT_HOME=$HOME/Code
+source /usr/local/bin/virtualenvwrapper.sh
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Source RVM
+
+PATH=$HOME/.rvm/bin:$PATH
