@@ -26,8 +26,8 @@ zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:load' pmodule \
   'environment' \
   'git' \
+  'python' \
   'terminal' \
-  'editor' \
   'history' \
   'directory' \
   'spectrum' \
