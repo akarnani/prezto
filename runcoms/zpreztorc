@@ -118,8 +118,8 @@ zstyle ':prezto:module:prompt' theme 'steeef'
    'main' \
    'brackets' \
    'pattern' \
-   'cursor'
-#   'root'
+   'cursor' \
+   'root'
 #
 # Set syntax highlighting styles.
 # zstyle ':prezto:module:syntax-highlighting' styles \
