@@ -78,6 +78,4 @@ export WORKON_HOME=$HOME/.envs
 export PROJECT_HOME=$HOME/Code
 #source /usr/local/bin/virtualenvwrapper.sh
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Source RVM
-
-PATH=$HOME/.rvm/bin:$PATH
+export RBENV_ROOT=/usr/local/var/rbenv
