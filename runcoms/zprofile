@@ -75,3 +75,4 @@ if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
 fi
 
+JAVA_HOME=$(/usr/libexec/java_home)

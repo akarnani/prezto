@@ -27,12 +27,14 @@ zstyle ':prezto:load' pmodule \
   'environment' \
   'git' \
   'python' \
+  'ruby' \
   'terminal' \
   'editor' \
   'history' \
   'directory' \
   'spectrum' \
   'utility' \
+  'osx' \
   'completion' \
   'node' \
   'syntax-highlighting' \
