@@ -46,12 +46,17 @@ function prompt_paradox_end_segment {
 
 function prompt_paradox_build_prompt {
   prompt_paradox_start_segment black default '%(?::%F{red}✘ )%(!:%F{yellow}⚡ :)%(1j:%F{cyan}⚙ :)%F{blue}%n%F{red}@%F{green}%m%f'
+  
+  if [[ -n "${python_info}" ]]; then
+    prompt_paradox_start_segment yellow black '${python_info[ref]}${python_info[virtualenv]}'
+  fi
+
   prompt_paradox_start_segment blue black '$_prompt_paradox_pwd'
 
   if [[ -n "$git_info" ]]; then
     prompt_paradox_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
   fi
-
+  
   prompt_paradox_end_segment
 }
 
@@ -95,6 +100,11 @@ function prompt_paradox_precmd {
   # Get Git repository information.
   if (( $+functions[git-info] )); then
     git-info
+  fi
+
+  # Get virual env info
+  if (( $+functions[python-info] )); then
+    python-info
   fi
 
   # Calculate and print the elapsed time.
@@ -142,12 +152,15 @@ function prompt_paradox_setup {
   zstyle ':prezto:module:git:info:keys' format \
     'ref' '$(coalesce "%b" "%p" "%c")' \
     'status' '%s%D%A%B%S%a%d%m%r%U%u'
+  
+  # Set python-info parameters
+  zstyle ':prezto:module:python:info:virtualenv' format '%F{black}ⓔ  %v%f'
 
   # Define prompts.
   PROMPT='
 ${(e)$(prompt_paradox_build_prompt)}
- ${editor_info[keymap]} '
-  RPROMPT='%F{blue}[%F{green}%D{%H:%M:%S}%F{blue}]%f'
+${editor_info[keymap]} '
+  #RPROMPT='%F{blue}[%F{green}%D{%H:%M:%S}%F{blue}]%f'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
