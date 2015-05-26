@@ -35,7 +35,7 @@ if (( ! $+commands[python] && ! $+commands[pyenv] )); then
 fi
 
 # Load virtualenvwrapper into the shell session.
-if (( $+commands[virtualenvwrapper_lazy.sh] )); then
+if (( $+commands[virtualenvwrapper.sh] )); then
   # Set the directory where virtual environments are stored.
   export WORKON_HOME="$HOME/.virtualenvs"
 
@@ -50,4 +50,3 @@ fi
 #
 
 alias py='python'
-
