@@ -13,3 +13,4 @@ fi
 export RBENV_ROOT=/usr/local/var/rbenv
 
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+export ONEPASSWORD_KEYCHAIN=~/Dropbox/1Password/Work/1Password.agilekeychain

@@ -18,4 +18,14 @@ alias npm-exec='PATH=$(npm bin):$PATH'
 
 giaw () { git diff -w --no-color "$@" | git apply --cached --ignore-whitespace}
 
+ds () {
+    eval $(docker-machine env dev)
+}
+dc () {
+    docker rmi $(docker images | grep '^<none>' | awk '{ print $3 }')
+}
+dr () {
+    docker rm $(docker ps -a -q)
+}
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+eval "$(pyenv init -)"
