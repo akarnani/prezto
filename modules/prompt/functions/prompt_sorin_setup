@@ -44,19 +44,21 @@ function prompt_sorin_pwd {
 }
 
 function prompt_sorin_git_info {
-  # Append Git status.
-  if [[ -s "$_prompt_sorin_precmd_async_data" ]]; then
-    alias typeset='typeset -g'
-    source "$_prompt_sorin_precmd_async_data"
-    RPROMPT+='${git_info:+${(e)git_info[status]}}'
-    unalias typeset
+  if (( _prompt_sorin_precmd_async_pid > 0 )); then
+    # Append Git status.
+    if [[ -s "$_prompt_sorin_precmd_async_data" ]]; then
+      alias typeset='typeset -g'
+      source "$_prompt_sorin_precmd_async_data"
+      RPROMPT+='${git_info:+${(e)git_info[status]}}'
+      unalias typeset
+    fi
+
+    # Reset PID.
+    _prompt_sorin_precmd_async_pid=0
+
+    # Redisplay prompt.
+    zle && zle reset-prompt
   fi
-
-  # Reset PID.
-  _prompt_sorin_precmd_async_pid=0
-
-  # Redisplay prompt.
-  zle && zle reset-prompt
 }
 
 function prompt_sorin_precmd_async {
@@ -67,7 +69,7 @@ function prompt_sorin_precmd_async {
   fi
 
   # Signal completion to parent process.
-  kill -USR1 $$
+  kill -WINCH $$
 }
 
 function prompt_sorin_precmd {
@@ -82,11 +84,11 @@ function prompt_sorin_precmd {
 
   # Kill the old process of slow commands if it is still running.
   if (( _prompt_sorin_precmd_async_pid > 0 )); then
-    kill -TERM "$_prompt_sorin_precmd_async_pid" &>/dev/null
+    kill -KILL "$_prompt_sorin_precmd_async_pid" &>/dev/null
   fi
 
   # Compute slow commands in the background.
-  trap prompt_sorin_git_info USR1
+  trap prompt_sorin_git_info WINCH
   prompt_sorin_precmd_async &!
   _prompt_sorin_precmd_async_pid=$!
 }
@@ -132,6 +134,15 @@ function prompt_sorin_setup {
   PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
   RPROMPT=''
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
+}
+
+function prompt_sorin_preview {
+  local +h PROMPT=''
+  local +h RPROMPT=''
+  local +h SPROMPT=''
+
+  editor-info 2>/dev/null
+  prompt_preview_theme 'sorin'
 }
 
 prompt_sorin_setup "$@"
