@@ -11,11 +11,13 @@ _terraform_cmds=(
     'output:Read an output from a state file'
     'plan:Generate and show an execution plan'
     'pull:Refreshes the local state copy from the remote server'
-    'push:Uploads the local state to the remote server'
+    'push:Uploads module to an Atlas server'
     'refresh:Update local state file against real resources'
     'remote:Configures remote state management'
     'taint:Manually forcing a destroy and recreate on the next plan/apply'
     'show:Inspect Terraform state or plan'
+    'fmt:Format terraform configuration files'
+    'validate:Validate terraform files syntax'
     'version:Prints the Terraform version'
 )
 
@@ -27,8 +29,8 @@ __apply() {
         '-refresh=[(true) Update state prior to checking for differences. This has no effect if a plan file is given to apply.]' \
         '-state=[(path) Path to read and save state (unless state-out is specified). Defaults to "terraform.tfstate".]:state file:_files' \
         '-state-out=[(path) Path to write state to that is different than "-state". This can be used to preserve the old state.]:state output file:_files' \
-        '-var[("foo=bar") Set a variable in the Terraform configuration. This flag can be set multiple times.]' \
-        '-var-file=[(path) Set variables in the Terraform configuration from a file. If "terraform.tfvars" is present, it will be automatically loaded if this flag is not specified.]:var file:_files' \
+        '*-var[("foo=bar") Set a variable in the Terraform configuration. This flag can be set multiple times.]' \
+        '*-var-file=[(path) Set variables in the Terraform configuration from a file. If "terraform.tfvars" is present, it will be automatically loaded if this flag is not specified.]:var file:_files' \
         ':plan file:_files'
 }
 
@@ -40,8 +42,8 @@ __destroy() {
         '-refresh=[(true) Update state prior to checking for differences. This has no effect if a plan file is given to apply.]' \
         '-state=[Path to read and save state (unless state-out is specified). Defaults to "terraform.tfstate".]:state file:_files' \
         '-state-out=[Path to write state to that is different than "-state". This can be used to preserve the old state.]:state output file:_files' \
-        '-var[("foo=bar") Set a variable in the Terraform configuration. This flag can be set multiple times.]' \
-        '-var-file=[(path) Set variables in the Terraform configuration from a file. If "terraform.tfvars" is present, it will be automatically loaded if this flag is not specified.]:var file:_files'
+        '*-var[("foo=bar") Set a variable in the Terraform configuration. This flag can be set multiple times.]' \
+        '*-var-file=[(path) Set variables in the Terraform configuration from a file. If "terraform.tfvars" is present, it will be automatically loaded if this flag is not specified.]:var file:_files'
 }
 
 __get() {
@@ -78,19 +80,26 @@ __plan() {
         '-out=[(path) Write a plan file to the given path. This can be used as input to the "apply" command.]:output file:_files' \
         '-refresh=[(true) Update state prior to checking for differences.]' \
         '-state=[(statefile) Path to a Terraform state file to use to look up Terraform-managed resources. By default it will use the state "terraform.tfstate" if it exists.]:state file:_files' \
-        '-var[("foo=bar") Set a variable in the Terraform configuration. This flag can be set multiple times.]' \
-        '-var-file=[(path) Set variables in the Terraform configuration from a file. If "terraform.tfvars" is present, it will be automatically loaded if this flag is not specified.]:var file:_files'
+        '*-var[("foo=bar") Set a variable in the Terraform configuration. This flag can be set multiple times.]' \
+        '*-var-file=[(path) Set variables in the Terraform configuration from a file. If "terraform.tfvars" is present, it will be automatically loaded if this flag is not specified.]:var file:_files'
 }
 
-__push() {
+__remote_push() {
     _arguments \
         '-force[Forces the upload of the local state, ignoring any conflicts. This should be used carefully, as force pushing can cause remote state information to be lost.]' \
         '-no-color[If specified, output will not contain any color.]'
 }
 
-__pull() {
+__remote_pull() {
     _arguments \
         '-no-color[If specified, output will not contain any color.]'
+}
+
+__fmt() {
+    _arguments \
+        '-list=[List files whose formatting differs.]:value:(true false)' \
+        '-write=[Write result to source file]:value:(true false)' \
+        '-diff=[Display diffs of formatting changes]:value:(true false)'
 }
 
 __refresh() {
@@ -100,8 +109,8 @@ __refresh() {
         '-no-color[If specified, output will not contain any color.]' \
         '-state=[(path) Path to read and save state (unless state-out is specified). Defaults to "terraform.tfstate".]:state file:_files' \
         '-state-out=[(path) Path to write state to that is different than "-state". This can be used to preserve the old state.]:state output file:_files' \
-        '-var[("foo=bar") Set a variable in the Terraform configuration. This flag can be set multiple times.]' \
-        '-var-file=[(path) Set variables in the Terraform configuration from a file. If "terraform.tfvars" is present, it will be automatically loaded if this flag is not specified.]:var file:_files'
+        '*-var[("foo=bar") Set a variable in the Terraform configuration. This flag can be set multiple times.]' \
+        '*-var-file=[(path) Set variables in the Terraform configuration from a file. If "terraform.tfvars" is present, it will be automatically loaded if this flag is not specified.]:var file:_files'
 }
 
 __taint() {
@@ -133,6 +142,11 @@ __show() {
         '-no-color[If specified, output will not contain any color.]'
 }
 
+__validate() {
+    _arguments \
+        '::directory:_path_files -/'
+}
+
 _arguments \
     '1: :{_describe -t commands "terraform command" _terraform_cmds}' \
     '*:: :->args'
@@ -157,8 +171,12 @@ case $state in
         __plan ;;
       push)
         __push ;;
+      fmt)
+        __fmt ;;
       refresh)
         __refresh ;;
+      validate)
+        __validate ;;
       remote)
         _command_args=(
             'config:Configure remote state settings'
@@ -175,9 +193,9 @@ case $state in
                 config)
                   __remote ;;
                 pull)
-                  __pull ;;
+                  __remote_pull ;;
                 push)
-                  __push ;;
+                  __remote_push ;;
               esac
               ;;
           esac
