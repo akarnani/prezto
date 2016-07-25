@@ -72,3 +72,7 @@ if [[ ! -d "$TMPDIR" ]]; then
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
+export GITHUB_URL="https://github.palantir.build"
+
+
+alias sublime='reattach-to-user-namespace sublime'
