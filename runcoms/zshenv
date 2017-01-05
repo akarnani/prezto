@@ -13,4 +13,9 @@ fi
 export RBENV_ROOT=/usr/local/var/rbenv
 
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-export ONEPASSWORD_KEYCHAIN=~/Dropbox/1Password/Work/1Password.agilekeychain
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+export NVM_DIR=~/.nvm
+
+if [[ -s "${ZDOTDIR:-$HOME}/.zsecret" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zsecret"
+fi

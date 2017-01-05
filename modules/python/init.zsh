@@ -29,6 +29,11 @@ else
   fi
 fi
 
+
+if (( $+commands[pyenv-virtualenv-init] )); then
+  eval "$(pyenv virtualenv-init -)"
+fi
+
 # Return if requirements are not found.
 if (( ! $+commands[python] && ! $+commands[pyenv] )); then
   return 1
