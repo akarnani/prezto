@@ -56,7 +56,7 @@ function prompt_paradox_build_prompt {
   if [[ -n "$git_info" ]]; then
     prompt_paradox_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
   fi
-  
+
   prompt_paradox_end_segment
 }
 
@@ -139,7 +139,7 @@ function prompt_paradox_setup {
   zstyle ':prezto:module:git:info:added' format ' ✚'
   zstyle ':prezto:module:git:info:ahead' format ' ⬆'
   zstyle ':prezto:module:git:info:behind' format ' ⬇'
-  zstyle ':prezto:module:git:info:branch' format ' %b'
+  zstyle ':prezto:module:git:info:branch' format '%b'
   zstyle ':prezto:module:git:info:commit' format '➦ %.7c'
   zstyle ':prezto:module:git:info:deleted' format ' ✖'
   zstyle ':prezto:module:git:info:dirty' format ' ⁝'
@@ -150,7 +150,7 @@ function prompt_paradox_setup {
   zstyle ':prezto:module:git:info:unmerged' format ' ═'
   zstyle ':prezto:module:git:info:untracked' format ' ?'
   zstyle ':prezto:module:git:info:keys' format \
-    'ref' '$(coalesce "%b" "%p" "%c")' \
+    'ref' ' $(coalesce "%b" "%p" "%c")' \
     'status' '%s%D%A%B%S%a%d%m%r%U%u'
   
   # Set python-info parameters
@@ -159,8 +159,8 @@ function prompt_paradox_setup {
   # Define prompts.
   PROMPT='
 ${(e)$(prompt_paradox_build_prompt)}
-${editor_info[keymap]} '
-  #RPROMPT='%F{blue}[%F{green}%D{%H:%M:%S}%F{blue}]%f'
+ ${editor_info[keymap]} '
+  RPROMPT='%F{blue}[%F{green}%D{%H:%M:%S}%F{blue}]%f'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
