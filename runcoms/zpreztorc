@@ -26,9 +26,8 @@ zstyle ':prezto:load' zfunction 'zargs' 'zmv' 'zcalc'
 zstyle ':prezto:load' pmodule \
   'environment' \
   'git' \
-  'python' \
-  'ruby' \
   'go' \
+  'python' \
   'terminal' \
   'tmux' \
   'editor' \
@@ -42,7 +41,7 @@ zstyle ':prezto:load' pmodule \
   'homebrew' \
   'completion' \
   'fasd' \
-  'node' \
+  'archmage' \
   'syntax-highlighting' \
   'history-substring-search' \
   'autosuggestions' \

@@ -13,7 +13,7 @@ if [[ -s "$HOME/.pyenv/bin/pyenv" ]]; then
 
 # Load package manager installed pyenv into the shell session.
 elif (( $+commands[pyenv] )); then
-  eval "$(pyenv init -)"
+  eval "$(pyenv init - --no-rehash)"
 
 # Prepend PEP 370 per user site packages directory, which defaults to
 # ~/Library/Python on Mac OS X and ~/.local elsewhere, to PATH. The
@@ -31,7 +31,7 @@ fi
 
 
 if (( $+commands[pyenv-virtualenv-init] )); then
-  eval "$(pyenv virtualenv-init -)"
+  eval "$(pyenv virtualenv-init - --no-rehash)"
 fi
 
 # Return if requirements are not found.

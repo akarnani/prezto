@@ -43,6 +43,8 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that Zsh searches for programs.
 path=(
+  /usr/local/opt/gnu-tar/libexec/gnubin
+  /Volumes/git/go/src/github.palantir.build/arch/archmage/scripts
   /usr/local/{bin,sbin}
   $path
 )
@@ -73,3 +75,5 @@ fi
 TMPPREFIX="${TMPDIR%/}/zsh"
 
 alias sublime='reattach-to-user-namespace sublime'
+export MAGE_NOPUSH="1"
+export MAGE_USE_KEYCHAIN="1"

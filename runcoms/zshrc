@@ -28,4 +28,6 @@ dr () {
     docker rm $(docker ps -a -q)
 }
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-eval "$(pyenv init -)"
+
+# Added by Krypton
+export GPG_TTY=$(tty)
