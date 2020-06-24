@@ -32,7 +32,6 @@ zstyle ':prezto:load' zfunction 'zargs' 'zmv' 'zcalc'
 zstyle ':prezto:load' pmodule \
   'environment' \
   'git' \
-  'go' \
   'terminal' \
   'tmux' \
   'editor' \
