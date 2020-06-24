@@ -23,7 +23,29 @@ function is-true {
 
 # Prints the first non-empty string in the arguments array.
 function coalesce {
-  print "${${(s: :)@}[1]}"
+  for arg in $argv; do
+    print "$arg"
+    return 0
+  done
+  return 1
 }
 
+# is true on MacOS Darwin
+function is-darwin {
+  [[ "$OSTYPE" == darwin* ]]
+}
 
+# is true on Linux's
+function is-linux {
+  [[ "$OSTYPE" == linux* ]]
+}
+
+# is true on BSD's
+function is-bsd {
+  [[ "$OSTYPE" == *bsd* ]]
+}
+
+# is true on Cygwin (Windows)
+function is-cygwin {
+  [[ "$OSTYPE" == cygwin* ]]
+}
