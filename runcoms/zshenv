@@ -16,9 +16,11 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export NVM_DIR=~/.nvm
 
-export SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
-export REQUESTS_CA_BUNDLE=/usr/local/etc/openssl/cert.pem
-export WEBSOCKET_CLIENT_CA_BUNDLE=/usr/local/etc/openssl/cert.pem
+if [[ -f "/usr/local/etc/openssl/cert.pem" ]]; then
+  export SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
+  export REQUESTS_CA_BUNDLE=/usr/local/etc/openssl/cert.pem
+  export WEBSOCKET_CLIENT_CA_BUNDLE=/usr/local/etc/openssl/cert.pem
+fi
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zsecret" ]]; then
     source "${ZDOTDIR:-$HOME}/.zsecret"
