@@ -42,6 +42,7 @@ zstyle ':prezto:load' pmodule \
   'osx' \
   'terraform' \
   'packer' \
+  'node' \
   'homebrew' \
   'completion' \
   'fasd' \
