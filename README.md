@@ -5,7 +5,16 @@ Prezto — Instantly Awesome Zsh
 
 Prezto is the configuration framework for [Zsh][1]; it enriches the command line
 interface environment with sane defaults, aliases, functions, auto completion,
-and prompt themes. 
+and prompt themes.
+
+## Installation
+
+### Manual
+
+Prezto will work with any recent release of Zsh, but the minimum required
+version is **4.3.11**.
+
+01. Launch Zsh:
 
 This repository is being actively maintained by a community of users. 
 
@@ -17,9 +26,7 @@ version is 4.3.11.
 
   1. Launch Zsh:
 
-     ```console
-     zsh
-     ```
+      - Configure `$XDG_CONFIG_HOME` and `$ZDOTDIR` in _`$HOME/.zshenv`_:
 
   2. Clone the repository:
 
@@ -51,6 +58,14 @@ version is 4.3.11.
      ```
 
   5. Open a new Zsh terminal window or tab.
+
+### [Fig](https://fig.io)
+
+Fig adds apps, shortcuts, and autocomplete to your existing terminal.
+
+Install `prezto` in just one click.
+
+<a href="https://fig.io/plugins/other/prezto" target="_blank"><img src="https://fig.io/badges/install-with-fig.svg" /></a>
 
 ### Troubleshooting
 

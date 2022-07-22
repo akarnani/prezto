@@ -39,7 +39,36 @@ Aliases
 Authors
 -------
 
-*The authors of this module should be contacted via the [issue tracker][2].*
+## Settings
+
+### histfile
+
+Can be configured either by setting HISTFILE manually before loading this
+module or by using zstyle:
+
+```sh
+zstyle ':prezto:module:history' histfile "<file_name>"
+```
+
+defaults to "${ZDOTDIR:-$HOME}/.zsh_history".
+
+### histsize
+
+```sh
+zstyle ':prezto:module:history' histsize <number>
+```
+
+defaults to 10000.
+
+### savehist
+
+```sh
+zstyle ':prezto:module:history' savehist <number>
+```
+
+defaults to histsize
+
+## Authors
 
   - [Robby Russell](https://github.com/robbyrussell)
   - [Sorin Ionescu](https://github.com/sorin-ionescu)

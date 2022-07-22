@@ -113,42 +113,34 @@ if (( $+VIRTUALENVWRAPPER_VIRTUALENV || $+commands[virtualenv] )) && \
     pyenv_plugins=(${(@oM)${(f)"$(pyenv commands --no-sh 2>/dev/null)"}:#virtualenv*})
   fi
 
+  # Optionally activate 'virtualenv' plugin when available.
   if (( $pyenv_plugins[(i)virtualenv-init] <= $#pyenv_plugins )); then
-    # Enable 'virtualenv' with 'pyenv'.
     eval "$(pyenv virtualenv-init - zsh)"
-
-    # Optionally activate 'virtualenvwrapper' plugin when available.
-    if (( $pyenv_plugins[(i)virtualenvwrapper(_lazy|)] <= $#pyenv_plugins )); then
-      pyenv "$pyenv_plugins[(R)virtualenvwrapper(_lazy|)]"
-    fi
-  else
-    # Fallback to 'virtualenvwrapper' without 'pyenv' wrapper if available
-    # in '$path' or in an alternative location on a Debian based system.
-    #
-    # If homebrew is installed and the python location wasn't overridden via
-    # environment variable we fall back to python3 then python2 in that order.
-    # This is needed to fix an issue with virtualenvwrapper as homebrew no
-    # longer shadows the system python.
-    if [[ -z "$VIRTUALENVWRAPPER_PYTHON" ]] && (( $+commands[brew] )); then
-      if (( $+commands[python3] )); then
-        export VIRTUALENVWRAPPER_PYTHON=$commands[python3]
-      elif (( $+commands[python2] )); then
-        export VIRTUALENVWRAPPER_PYTHON=$commands[python2]
-      fi
-    fi
-
-    virtenv_sources=(
-      ${(@Ov)commands[(I)virtualenvwrapper(_lazy|).sh]}
-      /usr/share/virtualenvwrapper/virtualenvwrapper(_lazy|).sh(OnN)
-    )
-    if (( $#virtenv_sources )); then
-      source "${virtenv_sources[1]}"
-    fi
-
-    unset virtenv_sources
   fi
 
+  # Optionally activate 'virtualenvwrapper' plugin when available.
+  if (( $pyenv_plugins[(i)virtualenvwrapper(_lazy|)] <= $#pyenv_plugins )); then
+    pyenv "$pyenv_plugins[(R)virtualenvwrapper(_lazy|)]"
+  fi
+  
   unset pyenv_plugins
+  
+else
+  # Fallback to 'virtualenvwrapper' without 'pyenv' wrapper if 'python' is
+  # available in '$path'.
+  if (( ! $+VIRTUALENVWRAPPER_PYTHON )) && (( $#commands[(i)python[23]#] )); then
+    VIRTUALENVWRAPPER_PYTHON=$commands[(i)python[23]#]
+  fi
+
+  virtenv_sources=(
+    ${(@Ov)commands[(I)virtualenvwrapper(_lazy|).sh]}
+    /usr/share/virtualenvwrapper/virtualenvwrapper(_lazy|).sh(OnN)
+  )
+  if (( $#virtenv_sources )); then
+    source "$virtenv_sources[1]"
+  fi
+
+  unset virtenv_sources
 fi
 
 # Load PIP completion.
