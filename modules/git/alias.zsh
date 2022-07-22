@@ -148,6 +148,7 @@ alias ggw='git grep --word-regexp'
   alias gpt='git push --tags'
   alias gpc='git push --set-upstream origin "$(git-branch-current 2> /dev/null)"'
   alias gpp='git pull origin "$(git-branch-current 2> /dev/null)" && git push origin "$(git-branch-current 2> /dev/null)"'
+  alias gpr='gp -u && link="$(gh prc)" && (echo "$link" | pbcopy) && open "$link"'
 
   # Rebase (r)
   alias gr='git rebase'
