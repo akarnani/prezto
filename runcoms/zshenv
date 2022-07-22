@@ -25,3 +25,5 @@ fi
 if [[ -s "${ZDOTDIR:-$HOME}/.zsecret" ]]; then
     source "${ZDOTDIR:-$HOME}/.zsecret"
 fi
+
+export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/palantir-ca-bundle.crt

@@ -15,6 +15,7 @@ setopt NO_NOMATCH
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 alias npm-exec='PATH=$(npm bin):$PATH'
+alias ssh='assh wrapper ssh --'
 
 giaw () { git diff -w --no-color "$@" | git apply --cached --ignore-whitespace}
 
