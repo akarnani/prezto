@@ -52,19 +52,16 @@ function prompt_paradox_build_prompt {
     prompt_paradox_start_segment cyan  white 'ψ $(mage prompt -r 2> /dev/null)'
   fi
 
-  if [[ -n "${python_info}" ]]; then
-    prompt_paradox_start_segment yellow black '${python_info[ref]}${python_info[virtualenv]}'
-  fi
-
   prompt_paradox_start_segment blue black '$_prompt_paradox_pwd'
+
+  if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
+    prompt_paradox_start_segment yellow black '🐍 $(basename "$VIRTUAL_ENV")'
+  fi
 
   if [[ -n "$git_info" ]]; then
     prompt_paradox_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
   fi
 
-  if [[ -n "$python_info" ]]; then
-    prompt_paradox_start_segment white black '${(e)python_info[virtualenv]}'
-  fi
 
   prompt_paradox_end_segment
 }
@@ -101,9 +98,9 @@ function prompt_paradox_precmd {
   fi
 
   # Get virual env info
-  #if (( $+functions[python-info] )); then
-  #  python-info
-  #fi
+  if (( $+functions[python-info] )); then
+    python-info
+  fi
 
   # Calculate and print the elapsed time.
   prompt_paradox_print_elapsed_time
