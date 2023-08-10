@@ -49,10 +49,20 @@ for compl_command in "${(k)compl_commands[@]}"; do
       command ${=compl_commands[$compl_command]} >! "$cache_file" 2> /dev/null
     fi
 
-    source "$cache_file"
+if ! zstyle -t ':prezto:module:node:alias' skip; then
+  # npm
+  alias npmi='npm install'
+  alias npml='npm list'
+  alias npmo='npm outdated'
+  alias npmp='npm publish'
+  alias npmP='npm prune'
+  alias npmr='npm run'
+  alias npms='npm search'
+  alias npmt='npm test'
+  alias npmu='npm update'
+  alias npmx='npm uninstall'
 
-    unset cache_file
-  fi
-done
-
-unset compl_command{s,}
+  alias npmci='npm ci'
+  alias npmcit='npm cit'
+  alias npmit='npm it'
+fi

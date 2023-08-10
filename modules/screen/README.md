@@ -27,10 +27,17 @@ zstyle ':prezto:module:screen:auto-start' remote 'yes'
 Aliases
 -------
 
-  - `scr` is short for `screen`.
-  - `scrl` lists sessions/socket directory.
-  - `scrn` starts a new session.
-  - `scrr` attaches to a session if one exists or start a new one.
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:screen:alias' skip 'yes'
+```
+
+- `scr` is short for `screen`.
+- `scrl` lists sessions/socket directory.
+- `scrn` starts a new session.
+- `scrr` attaches to a session if one exists or start a new one.
 
 Authors
 -------

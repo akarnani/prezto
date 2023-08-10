@@ -36,8 +36,14 @@ Aliases
 
   - `history-stat` lists the ten most used commands
 
-Authors
--------
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:history:alias' skip 'yes'
+```
+
+- `history-stat` lists the ten most used commands
 
 ## Settings
 

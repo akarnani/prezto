@@ -23,8 +23,14 @@ production. nodenv is forked from the popular [rbenv][7].
 This will be loaded automatically if nodenv is installed in `$NODENV_ROOT`,
 `~/.nodenv`, or `nodenv` is on the path.
 
-Functions
----------
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:node:alias' skip 'yes'
+```
+
+### npm
 
   - `node-doc` opens the Node.js online [API documentation][3] in the default
     browser.

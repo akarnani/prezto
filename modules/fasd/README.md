@@ -21,7 +21,14 @@ If a manual install is found, it will be used instead of the bundled version.
 Aliases
 -------
 
-  - `j` changes the current working directory interactively.
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:fasd:alias' skip 'yes'
+```
+
+- `j` changes the current working directory interactively.
 
 Completion
 ----------

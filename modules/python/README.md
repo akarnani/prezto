@@ -122,9 +122,16 @@ zstyle ':prezto:module:python:virtualenv' initialize 'no'
 Aliases
 -------
 
-  - `py` is short for `python`.
-  - `py2` is short for `python2`.
-  - `py3` is short for `python3`.
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:python:alias' skip 'yes'
+```
+
+- `py` is short for `python`.
+- `py2` is short for `python2`.
+- `py3` is short for `python3`.
 
 Functions
 ---------

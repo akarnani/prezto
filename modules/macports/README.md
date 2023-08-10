@@ -6,13 +6,20 @@ Defines MacPorts aliases and adds MacPorts directories to path variables.
 Aliases
 -------
 
-  - `portc` cleans the files used to build ports.
-  - `porti` installs a port.
-  - `ports` searches for a port.
-  - `portu` upgrades a port.
-  - `portU` upgrades MacPorts, the ports collection, and outdated ports.
-  - `portx` uninstalls a port.
-  - `portX` uninstalls inactive ports.
+Aliases are enabled by default. To disable them, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
+
+```sh
+zstyle ':prezto:module:macports:alias' skip 'yes'
+```
+
+- `portc` cleans the files used to build ports.
+- `porti` installs a port.
+- `ports` searches for a port.
+- `portu` upgrades a port.
+- `portU` upgrades MacPorts, the ports collection, and outdated ports.
+- `portx` uninstalls a port.
+- `portX` uninstalls inactive ports.
 
 Authors
 -------
