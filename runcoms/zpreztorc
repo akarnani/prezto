@@ -43,6 +43,7 @@ zstyle ':prezto:load' pmodule \
   'terraform' \
   'packer' \
   'node' \
+  'go' \
   'homebrew' \
   'completion' \
   'fasd' \
