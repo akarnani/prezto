@@ -49,3 +49,11 @@ if ! zstyle -t ':prezto:module:tmux:alias' skip; then
   alias tmuxa="tmux $_tmux_iterm_integration new-session -A"
   alias tmuxl='tmux list-sessions'
 fi
+
+if [[ -n "$TMUX" && -f ~/.tmux/plugins/tmux-window-name/scripts/rename_session_windows.py ]]; then
+  tmux-window-name() {
+    (~/.tmux/plugins/tmux-window-name/scripts/rename_session_windows.py &)
+  }
+
+  add-zsh-hook chpwd tmux-window-name
+fi
