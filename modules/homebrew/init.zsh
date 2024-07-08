@@ -25,6 +25,13 @@ if (( $+commands[brew] )); then
 fi
 
 #
+# Completions
+#
+if (( $+commands[brew] )); then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
+#
 # Aliases
 #
 
