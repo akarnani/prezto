@@ -52,7 +52,8 @@ zstyle ':prezto:load' pmodule \
   'autosuggestions' \
   'prompt' \
   'direnv' \
-  'ssh'
+  'ssh' \
+  'iterm'
 
 #
 # Deer

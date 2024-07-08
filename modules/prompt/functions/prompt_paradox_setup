@@ -157,7 +157,7 @@ function prompt_paradox_setup {
   # Define prompts.
   PROMPT='
 ${(e)$(prompt_paradox_build_prompt)}
- ${editor_info[keymap]} '
+%{$(iterm2_prompt_mark)%} ${editor_info[keymap]} '
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
