@@ -21,9 +21,11 @@ if [[ -s "${PYENV_ROOT:=$HOME/.pyenv}/bin/pyenv" ]]; then
   path=("${PYENV_ROOT}/bin" $path)
   eval "$(pyenv init - --no-rehash zsh)"
 
-# Load pyenv into the current python session
-elif (( $+commands[pyenv] )); then
-  eval "$(pyenv init - --no-rehash zsh)"
+  # Ensure manually installed pyenv is added to path when present.
+  [[ -s $local_pyenv ]] && path=($local_pyenv:h $path)
+
+  # Load pyenv into the shell session.
+  eval "$(pyenv init - zsh)"
 
 # Prepend PEP 370 per user site packages directory, which defaults to
 # ~/Library/Python on macOS and ~/.local elsewhere, to PATH. The

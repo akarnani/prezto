@@ -3,15 +3,15 @@ Python
 
 Enables local Python and local Python package installation.
 
-Settings
---------
+## Settings
 
-This module supports virtual environments from conda and virtualenvwrapper. By
-default, only virtualenvwrapper is enabled. To disable virtualenvwrapper, add
-the following to *zpreztorc*.
+This module supports virtual environments from conda and
+[_virtualenvwrapper_][2]. By default, only _virtualenvwrapper_ is enabled. To
+disable _virtualenvwrapper_, add the following to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_.
 
 ```sh
-zstyle ':prezto:module:python' skip-virtualenvwrapper-init 'on'
+zstyle ':prezto:module:python:virtualenv' initialize 'no'
 ```
 
 Conda support is enabled by adding the following to *zpreztorc*.

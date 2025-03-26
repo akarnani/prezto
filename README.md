@@ -28,7 +28,11 @@ version is 4.3.11.
 
       - Configure `$XDG_CONFIG_HOME` and `$ZDOTDIR` in _`$HOME/.zshenv`_:
 
-  2. Clone the repository:
+        ```sh
+        export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
+        [[ -d $XDG_CONFIG_HOME/zsh ]] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+        source "$ZDOTDIR/.zshenv"
+        ```
 
      ```console
      git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
@@ -58,14 +62,6 @@ version is 4.3.11.
      ```
 
   5. Open a new Zsh terminal window or tab.
-
-### [Fig](https://fig.io)
-
-Fig adds apps, shortcuts, and autocomplete to your existing terminal.
-
-Install `prezto` in just one click.
-
-<a href="https://fig.io/plugins/other/prezto" target="_blank"><img src="https://fig.io/badges/install-with-fig.svg" /></a>
 
 ### Troubleshooting
 

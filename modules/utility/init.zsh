@@ -73,7 +73,7 @@ if zstyle -T ':prezto:module:utility' safe-ops; then
 fi
 
 # ls
-if is-callable 'dircolors'; then
+if [[ ${(@M)${(f)"$(ls --version 2>&1)"}:#*(GNU|lsd) *} ]]; then
   # GNU Core Utilities
 
   if zstyle -T ':prezto:module:utility:ls' dirs-first; then
@@ -81,10 +81,11 @@ if is-callable 'dircolors'; then
   fi
 
   if zstyle -t ':prezto:module:utility:ls' color; then
-    # Call dircolors to define colors if they're missing
-    if [[ -z "$LS_COLORS" ]]; then
-      if [[ -s "$HOME/.dir_colors" ]]; then
-        eval "$(dircolors --sh "$HOME/.dir_colors")"
+    # Define colors for GNU ls if they're not already defined
+    if (( ! $+LS_COLORS )); then
+      # Try dircolors when available
+      if is-callable 'dircolors'; then
+        eval "$(dircolors --sh $HOME/.dir_colors(N))"
       else
         eval "$(dircolors --sh)"
       fi
@@ -123,7 +124,10 @@ alias lk='ll -Sr'        # Lists sorted by size, largest last.
 alias lt='ll -tr'        # Lists sorted by date, most recent last.
 alias lc='lt -c'         # Lists sorted by date, most recent last, shows change time.
 alias lu='lt -u'         # Lists sorted by date, most recent last, shows access time.
-alias sl='ls'            # I often screw this up.
+
+if [[ ${(@M)${(f)"$(ls --version 2>&1)"}:#*GNU *} ]]; then
+  alias lx='ll -XB'      # Lists sorted by extension (GNU only).
+fi
 
 # Grep
 if zstyle -t ':prezto:module:utility:grep' color; then

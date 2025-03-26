@@ -58,8 +58,43 @@ To set the search globbing flags, add the following line to *zpreztorc*:
 zstyle ':prezto:module:history-substring-search' globbing-flags ''
 ```
 
-Authors
--------
+### Case sensitive search
+
+To set the search case-sensitivity, add the following line to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_:
+
+```sh
+zstyle ':prezto:module:history-substring-search' case-sensitive 'yes'
+```
+
+### Fuzzy search
+
+To enable search for fuzzy matches, add the following line to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_:
+
+```sh
+zstyle ':prezto:module:history-substring-search' fuzzy 'yes'
+```
+
+### Unique results
+
+To enable unique results, add the following line to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_:
+
+```sh
+zstyle ':prezto:module:history-substring-search' unique 'yes'
+```
+
+### Prefixed search
+
+To enable prefixed search matches, add the following line to
+_`${ZDOTDIR:-$HOME}/.zpreztorc`_:
+
+```sh
+zstyle ':prezto:module:history-substring-search' prefixed 'yes'
+```
+
+## Authors
 
 *The authors of this module should be contacted via the [issue tracker][3].*
 
